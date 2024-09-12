@@ -14,8 +14,10 @@ while True:
             start_time = time.time()  # Start timing when Ctrl is first pressed
         elif time.time() - start_time >= duration:
             print(f"'Ctrl' has been held for {duration} seconds!")
-    else: # ctrl 버튼에서 손 뗐을 때 함수 실행됨.
-        change_key_option() 
-        print('함수실행됨.')
+            if(keyboard.is_pressed('ctrl') == False):
+                change_key_option()
+                print('function have beeen excuted.')
+    elif(keyboard.is_pressed('ctrl') == False):
+        print('Ctrl is released.')
         start_time = None  # Reset if Ctrl is released
     time.sleep(0.5)  # Check every 500ms
