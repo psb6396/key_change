@@ -1,5 +1,7 @@
+# %%
 import keyboard
 import time
+import mouse
 
 start_time = None
 duration = 3
@@ -14,10 +16,16 @@ while True:
             start_time = time.time()  # Start timing when Ctrl is first pressed
         elif time.time() - start_time >= duration:
             print(f"'Ctrl' 버튼이 {time.time() - start_time} 초 동안 눌려짐.")
-
+            keyboard.add_hotkey('s', mouse.click())
             function_have_been_executed = True
     elif(keyboard.is_pressed('ctrl') == False):
         print('.')
         start_time = None  # Reset if Ctrl is released
         function_have_been_executed = False
     time.sleep(0.5)  # Check every 500ms
+
+
+# %%
+keyboard.add_hotkey('s', mouse.click())
+
+
