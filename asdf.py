@@ -8,20 +8,20 @@ duration = 3
 function_have_been_executed = False
 
 def press_mouse_button():
-    mouse.press(button='left', suppress=True)  # Simulate pressing the left mouse button
+    mouse.press(button='left')  # Simulate pressing the left mouse button
     print("Mouse button pressed")
 
 def release_mouse_button():
-    mouse.release(button='left', suppress=True)  # Simulate releasing the left mouse button
+    mouse.release(button='left')  # Simulate releasing the left mouse button
     print("Mouse button released")
     
 def ctrl_c():
     keyboard.send('ctrl+c')
 
 def change_key_option():
-    keyboard.on_press_key('s', lambda _: press_mouse_button())   # Press 's' to press mouse button
-    keyboard.on_release_key('s', lambda _: release_mouse_button())  # Release 's' to release mouse button
-    keyboard.add_hotkey('d', ctrl_c)
+    keyboard.on_press_key('s', lambda _: press_mouse_button(), suppress=True)   # Press 's' to press mouse button
+    keyboard.on_release_key('s', lambda _: release_mouse_button(), suppress=True)  # Release 's' to release mouse button
+    keyboard.add_hotkey('d', ctrl_c, suppress=True)
 
 while True:
     if keyboard.is_pressed('ctrl') and function_have_been_executed == False:
@@ -39,6 +39,6 @@ while True:
 
 
 # %%
-# keyboard.unhook_all()
+keyboard.unhook_all()
 
 
