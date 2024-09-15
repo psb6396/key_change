@@ -7,8 +7,21 @@ start_time = None
 duration = 3
 function_have_been_executed = False
 
+def press_mouse_button():
+    mouse.press(button='left', suppress=True)  # Simulate pressing the left mouse button
+    print("Mouse button pressed")
+
+def release_mouse_button():
+    mouse.release(button='left', suppress=True)  # Simulate releasing the left mouse button
+    print("Mouse button released")
+    
+def ctrl_c():
+    keyboard.send('ctrl+c')
+
 def change_key_option():
-    pass
+    keyboard.on_press_key('s', lambda _: press_mouse_button())   # Press 's' to press mouse button
+    keyboard.on_release_key('s', lambda _: release_mouse_button())  # Release 's' to release mouse button
+    keyboard.add_hotkey('d', ctrl_c)
 
 while True:
     if keyboard.is_pressed('ctrl') and function_have_been_executed == False:
@@ -16,7 +29,7 @@ while True:
             start_time = time.time()  # Start timing when Ctrl is first pressed
         elif time.time() - start_time >= duration:
             print(f"'Ctrl' 버튼이 {time.time() - start_time} 초 동안 눌려짐.")
-            keyboard.add_hotkey('s', mouse.click())
+            change_key_option()
             function_have_been_executed = True
     elif(keyboard.is_pressed('ctrl') == False):
         print('.')
@@ -26,6 +39,6 @@ while True:
 
 
 # %%
-keyboard.add_hotkey('s', mouse.click())
+# keyboard.unhook_all()
 
 
