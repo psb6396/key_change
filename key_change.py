@@ -10,11 +10,11 @@ is_released = False
 
 def press_mouse_button():
     mouse.press(button='left')  # Simulate pressing the left mouse button
-    print("Mouse button pressed")
+    
 
 def release_mouse_button():
     mouse.release(button='left')  # Simulate releasing the left mouse button
-    print("Mouse button released")
+    
     
 def ctrl_c():
     keyboard.send('ctrl+c')
